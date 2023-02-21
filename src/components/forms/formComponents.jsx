@@ -1,25 +1,33 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
 const FormComponents = () => {
-const handleSubmit = () =>{
-    // save all data and send to server like notification
-}
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+  const handleSubmit = () => {
+    axios
+      .post("http://localhost:8000/data", { title, message })
+      .then((r) => console.log(r))
+      .catch((e) => console.log(e));
+  };
   return (
-    <div>
-      <form method="post">
-        <ul>
-          <li>
-            <label for="title">Título:</label>
-            <input type="text" id="title" name="Título" />
-          </li>
-          <li>
-            <label for="mensaje">Mensaje</label>
-            <input type="mensaje" id="mensaje" name="mensaje" />
-          </li>
-        </ul>
-        <button onClick={handleSubmit}>send</button>
-      </form>
-    </div>
+    <>
+      <h1>Holaa</h1>
+      <div>
+        <input
+          type="text"
+          placeholder="pls write title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <textarea
+          placeholder="pls write your message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        ></textarea>
+        <button onClick={handleSubmit}>Send Message</button>
+      </div>
+    </>
   );
 };
 
